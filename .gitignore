@@ -1,3 +1,5 @@
+
+### Go ###
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -13,3 +15,27 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+### Go Patch ###
+/vendor/
+/Godeps/
+
+### react ###
+.DS_*
+*.log
+*.db
+*.idea
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/go,react
