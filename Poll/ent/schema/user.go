@@ -17,7 +17,7 @@ func (User) Fields() []ent.Field {
 			Unique(),
 		field.String("name").
 			Default("unknown"),
-		field.String("password"),
+		field.String("password").Sensitive(),
 		field.String("email").Unique(),
 	}
 }
