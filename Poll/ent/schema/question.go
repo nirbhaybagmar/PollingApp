@@ -19,7 +19,7 @@ func (Question) Fields() []ent.Field {
 			Unique(),
 		field.String("body"),
 		field.Int("user_id"),
-		field.Time("pollExpiry").Optional(),
+		field.Time("pollExpiry"),
 		field.Time("created_at").
 			Default(time.Now),
 		field.Time("updated_at").

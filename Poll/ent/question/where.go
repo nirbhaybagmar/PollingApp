@@ -363,20 +363,6 @@ func PollExpiryLTE(v time.Time) predicate.Question {
 	})
 }
 
-// PollExpiryIsNil applies the IsNil predicate on the "pollExpiry" field.
-func PollExpiryIsNil() predicate.Question {
-	return predicate.Question(func(s *sql.Selector) {
-		s.Where(sql.IsNull(s.C(FieldPollExpiry)))
-	})
-}
-
-// PollExpiryNotNil applies the NotNil predicate on the "pollExpiry" field.
-func PollExpiryNotNil() predicate.Question {
-	return predicate.Question(func(s *sql.Selector) {
-		s.Where(sql.NotNull(s.C(FieldPollExpiry)))
-	})
-}
-
 // CreatedAtEQ applies the EQ predicate on the "created_at" field.
 func CreatedAtEQ(v time.Time) predicate.Question {
 	return predicate.Question(func(s *sql.Selector) {

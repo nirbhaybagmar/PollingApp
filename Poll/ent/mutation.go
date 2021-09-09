@@ -829,22 +829,9 @@ func (m *QuestionMutation) OldPollExpiry(ctx context.Context) (v time.Time, err 
 	return oldValue.PollExpiry, nil
 }
 
-// ClearPollExpiry clears the value of the "pollExpiry" field.
-func (m *QuestionMutation) ClearPollExpiry() {
-	m.pollExpiry = nil
-	m.clearedFields[question.FieldPollExpiry] = struct{}{}
-}
-
-// PollExpiryCleared returns if the "pollExpiry" field was cleared in this mutation.
-func (m *QuestionMutation) PollExpiryCleared() bool {
-	_, ok := m.clearedFields[question.FieldPollExpiry]
-	return ok
-}
-
 // ResetPollExpiry resets all changes to the "pollExpiry" field.
 func (m *QuestionMutation) ResetPollExpiry() {
 	m.pollExpiry = nil
-	delete(m.clearedFields, question.FieldPollExpiry)
 }
 
 // SetCreatedAt sets the "created_at" field.
@@ -1147,11 +1134,7 @@ func (m *QuestionMutation) AddField(name string, value ent.Value) error {
 // ClearedFields returns all nullable fields that were cleared during this
 // mutation.
 func (m *QuestionMutation) ClearedFields() []string {
-	var fields []string
-	if m.FieldCleared(question.FieldPollExpiry) {
-		fields = append(fields, question.FieldPollExpiry)
-	}
-	return fields
+	return nil
 }
 
 // FieldCleared returns a boolean indicating if a field with the given name was
@@ -1164,11 +1147,6 @@ func (m *QuestionMutation) FieldCleared(name string) bool {
 // ClearField clears the value of the field with the given name. It returns an
 // error if the field is not defined in the schema.
 func (m *QuestionMutation) ClearField(name string) error {
-	switch name {
-	case question.FieldPollExpiry:
-		m.ClearPollExpiry()
-		return nil
-	}
 	return fmt.Errorf("unknown Question nullable field %s", name)
 }
 

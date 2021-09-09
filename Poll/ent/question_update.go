@@ -48,20 +48,6 @@ func (qu *QuestionUpdate) SetPollExpiry(t time.Time) *QuestionUpdate {
 	return qu
 }
 
-// SetNillablePollExpiry sets the "pollExpiry" field if the given value is not nil.
-func (qu *QuestionUpdate) SetNillablePollExpiry(t *time.Time) *QuestionUpdate {
-	if t != nil {
-		qu.SetPollExpiry(*t)
-	}
-	return qu
-}
-
-// ClearPollExpiry clears the value of the "pollExpiry" field.
-func (qu *QuestionUpdate) ClearPollExpiry() *QuestionUpdate {
-	qu.mutation.ClearPollExpiry()
-	return qu
-}
-
 // SetCreatedAt sets the "created_at" field.
 func (qu *QuestionUpdate) SetCreatedAt(t time.Time) *QuestionUpdate {
 	qu.mutation.SetCreatedAt(t)
@@ -242,12 +228,6 @@ func (qu *QuestionUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: question.FieldPollExpiry,
 		})
 	}
-	if qu.mutation.PollExpiryCleared() {
-		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
-			Column: question.FieldPollExpiry,
-		})
-	}
 	if value, ok := qu.mutation.CreatedAt(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeTime,
@@ -385,20 +365,6 @@ func (quo *QuestionUpdateOne) SetUserID(i int) *QuestionUpdateOne {
 // SetPollExpiry sets the "pollExpiry" field.
 func (quo *QuestionUpdateOne) SetPollExpiry(t time.Time) *QuestionUpdateOne {
 	quo.mutation.SetPollExpiry(t)
-	return quo
-}
-
-// SetNillablePollExpiry sets the "pollExpiry" field if the given value is not nil.
-func (quo *QuestionUpdateOne) SetNillablePollExpiry(t *time.Time) *QuestionUpdateOne {
-	if t != nil {
-		quo.SetPollExpiry(*t)
-	}
-	return quo
-}
-
-// ClearPollExpiry clears the value of the "pollExpiry" field.
-func (quo *QuestionUpdateOne) ClearPollExpiry() *QuestionUpdateOne {
-	quo.mutation.ClearPollExpiry()
 	return quo
 }
 
@@ -603,12 +569,6 @@ func (quo *QuestionUpdateOne) sqlSave(ctx context.Context) (_node *Question, err
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeTime,
 			Value:  value,
-			Column: question.FieldPollExpiry,
-		})
-	}
-	if quo.mutation.PollExpiryCleared() {
-		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
 			Column: question.FieldPollExpiry,
 		})
 	}

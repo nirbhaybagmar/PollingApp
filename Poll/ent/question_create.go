@@ -40,14 +40,6 @@ func (qc *QuestionCreate) SetPollExpiry(t time.Time) *QuestionCreate {
 	return qc
 }
 
-// SetNillablePollExpiry sets the "pollExpiry" field if the given value is not nil.
-func (qc *QuestionCreate) SetNillablePollExpiry(t *time.Time) *QuestionCreate {
-	if t != nil {
-		qc.SetPollExpiry(*t)
-	}
-	return qc
-}
-
 // SetCreatedAt sets the "created_at" field.
 func (qc *QuestionCreate) SetCreatedAt(t time.Time) *QuestionCreate {
 	qc.mutation.SetCreatedAt(t)
@@ -190,6 +182,9 @@ func (qc *QuestionCreate) check() error {
 	}
 	if _, ok := qc.mutation.UserID(); !ok {
 		return &ValidationError{Name: "user_id", err: errors.New(`ent: missing required field "user_id"`)}
+	}
+	if _, ok := qc.mutation.PollExpiry(); !ok {
+		return &ValidationError{Name: "pollExpiry", err: errors.New(`ent: missing required field "pollExpiry"`)}
 	}
 	if _, ok := qc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "created_at"`)}

@@ -26,7 +26,7 @@ var (
 	QuestionsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "body", Type: field.TypeString},
-		{Name: "poll_expiry", Type: field.TypeTime, Nullable: true},
+		{Name: "poll_expiry", Type: field.TypeTime},
 		{Name: "created_at", Type: field.TypeTime},
 		{Name: "updated_at", Type: field.TypeTime},
 		{Name: "user_id", Type: field.TypeInt, Nullable: true},
