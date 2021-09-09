@@ -10,10 +10,23 @@ import (
 	"strconv"
 )
 
+// Payload of a ent.User create request.
+type UserCreateRequest struct {
+	Email     string   `json:"email"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+// Payload of a ent.User create request.
+type UserLoginRequest struct {
+	Email     string   `json:"email"`
+	Password string `json:"password"`
+}
+
 // Register creates a new user entry
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 
-	var d ent.User
+	var d UserCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
 		render.BadRequest(w, r, "invalid json string")
 		return
@@ -35,7 +48,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 
 // Login verifies the login credentials of the user
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
-	var d ent.User
+	var d UserLoginRequest
 	if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
 		render.BadRequest(w, r, "invalid json string")
 		return
